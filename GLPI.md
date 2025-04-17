@@ -8,7 +8,7 @@ GLPI est une solution open source de gestion de parc informatique et de services
 ## INSTALLATION ET CONFIGURATION
 
 
-## Mise à jour du serveur
+- Mise à jour du serveur
 ```sh
 sudo -i
 apt update && apt -y dist-upgrade
