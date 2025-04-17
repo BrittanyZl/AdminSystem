@@ -89,6 +89,7 @@ nano /var/www/html/main.php
 ```
 ```sh
     - son contenu
+
 <?php phpinfo(); ?>     
 ```
 
