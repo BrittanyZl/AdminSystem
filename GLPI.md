@@ -83,12 +83,12 @@ ls /etc/php
 ```
 
 - Création d'un fichier test
-
-nano /var/www/html/main.php
-
 ```sh
-    - son contenu
+nano /var/www/html/main.php
+```
 
+    - son contenu
+```sh
 <?php phpinfo(); ?>     
 ```
 
@@ -135,25 +135,26 @@ mysql -u root
 ```
 
 - A faire dans MySQL
-```sh
+
     - Liste les base de données existantes
+```sh
     show databases;
 ```
-```sh
-    - Création d'une base de données         
+    - Création d'une base de données
+  ```sh      
     create database glpi; 
 ```
-```sh
-    - Création d'un utilisateur avec son mot de passe    
+    - Création d'un utilisateur avec son mot de passe
+ ```sh
     create user 'admin'@localhost identified by 'cfitech'; 
 ```
+    - Attributions des permissions
 ```sh
-    - Attributions des permissions 
     grant all privileges on glpi.* to admin@localhost;
     flush privileges;
 ```
-```sh
     - Sortir
+```sh
     exit
 ```
 
@@ -172,7 +173,9 @@ ls /var/www/html/
 - Configuration d'Apache pour GLPI
 ```sh
 nano /etc/apache2/sites-available/000-default.conf
+```
     - Son contenu
+```sh
 <VirtualHost *:80>
     DocumentRoot /var/www/html/glpi
 </VirtualHost>
@@ -242,27 +245,26 @@ systemctl restart apache2
     - Mot de passe : glpi  
 
 - Installation du Plugin FusionInventory
-```sh
     - Se placer dans le dossier des plugins GLPI
+```sh
     cd /var/www/html/glpi/plugins
 ```
-```sh
 - Télécharger la dernière version du plugin
+```sh
 wget https://github.com/fusioninventory/fusioninventory-for-glpi/releases/download/glpi10.0.6%2B1.1/fusioninventory-10.0.6+1.1.tar.bz2
 ```
-```sh
 - Extraire l'archive
+```sh
 tar -xjf fusioninventory-10.0.6+1.1.tar.bz2
 ```
-
-```sh
 - Configurer les permissions
+```sh
 chown -R www-data:www-data fusioninventory
 ```
 
 - Configuration d'Apache
-```sh
     - Créer la configuration virtuelle
+```sh
     nano /etc/apache2/sites-available/glpi.conf
 ```
     - Ajouter la configuration suivante
@@ -311,8 +313,9 @@ systemctl restart cron
         - Télécharger l'agent depuis https://github.com/fusioninventory/fusioninventory-agent/releases/tag/2.6
         - Installer l'agent
         - Configurer C:\Program Files\FusionInventory-Agent\agent.cfg avec :
+        ```sh
 Mode servers = http://<IP_SERVER>/plugins/fusioninventory/front/plugin_fusioninventory.communication.php
-
+```
 - Redémarrer le service
 ´´´sh
 net stop FusionInventory-Agent && net start FusionInventory-Agent
