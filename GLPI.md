@@ -3,15 +3,16 @@
 
 GLPI est une solution open source de gestion de parc informatique et de services d’assistance (helpdesk). C’est un outil très complet, utilisé principalement dans les entreprises, administrations et structures IT pour gérer efficacement leurs ressources informatiques, suivre les demandes d’assistance, et organiser les interventions des techniciens.
 
-## Utilisation Gpli avec serveur Ubuntu 22.04
+## Utilisation GLPI avec serveur Ubuntu 22.04
 
 ## INSTALLATION ET CONFIGURATION
-
+´´´sh
+´´´
 ## Mise à jour du serveur
 ´´´sh
 sudo -i
 apt update && apt -y dist-upgrade
-```
+´´´
 
 - Installation et autorisation du ssh pour l'accés à distance
 ´´´sh
