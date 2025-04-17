@@ -135,16 +135,24 @@ mysql -u root
 - A faire dans MySQL
 ```sh
     - Liste les base de données existantes
-show databases;  
+    show databases;
+```
+```sh
     - Création d'une base de données         
-create database glpi; 
+    create database glpi; 
+```
+```sh
     - Création d'un utilisateur avec son mot de passe    
-create user 'admin'@localhost identified by 'cfitech'; 
+    create user 'admin'@localhost identified by 'cfitech'; 
+```
+```sh
     - Attributions des permissions 
-grant all privileges on glpi.* to admin@localhost;
-flush privileges;
+    grant all privileges on glpi.* to admin@localhost;
+    flush privileges;
+```
+```sh
     - Sortir
-exit
+    exit
 ```
 
 - Rédemarrer MariaDB
@@ -199,8 +207,9 @@ systemctl restart apache2
     - Sélectionner la langue et suivre l’assistant
     - Entrer les informations de la base de données
     - Valider l’installation
-```sh
+
     - Entrer ces données
+```sh
         Serveur : localhost
         Utilisateur : admin
         Mot de passe : cfitech
