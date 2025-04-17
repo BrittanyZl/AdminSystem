@@ -5,8 +5,7 @@ GLPI est une solution open source de gestion de parc informatique et de services
 
 ## Utilisation GLPI avec serveur Ubuntu 22.04
 
-## INSTALLATION ET CONFIGURATION
-
+### Installation et Configuration
 
 - Mise à jour du serveur
 ```sh
