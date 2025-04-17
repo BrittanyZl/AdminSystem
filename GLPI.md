@@ -6,36 +6,36 @@ GLPI est une solution open source de gestion de parc informatique et de services
 ## Utilisation GLPI avec serveur Ubuntu 22.04
 
 ## INSTALLATION ET CONFIGURATION
-´´´sh
-´´´
+
+
 ## Mise à jour du serveur
-´´´sh
+```sh
 sudo -i
 apt update && apt -y dist-upgrade
-´´´
+```
 
 - Installation et autorisation du ssh pour l'accés à distance
-´´´sh
+```sh
 sudo apt install ssh
 sudo ufw allow ssh
-´´´
+```
 
 - Connexion à distance dans l'invite de commande
-´´´sh
+```sh
 ssh NomDuServeur@IpServeur
-´´´
+```
 
 - Installation d'Apache2
-´´´sh
+```sh
 apt install apache2
-´´´
+```
 
 - Installation de PHP 8.2
-´´´sh
+```sh
 sudo apt install software-properties-common -y
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
-´´´
+```
 
 - Installation des modules PHP 8.2
 ´´´sh
