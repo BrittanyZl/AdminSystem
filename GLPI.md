@@ -22,7 +22,7 @@ sudo ufw allow ssh
 
 - Connexion à distance dans l'invite de commande
 ```sh
-ssh NomDuServeur@IpServeur
+ssh <Nom_Serveur>@<Ip_Serveur>
 ```
 
 - Installation d'Apache2
