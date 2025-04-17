@@ -307,7 +307,7 @@ systemctl restart cron
     - Aller dans Configuration > Action automatique
     - Rechercher taskscheduler et cliquer sur Exécuter
 
-- Installation des Agents
+### Installation des Agents
     - Pour Windows
         - Télécharger l'agent depuis https://github.com/fusioninventory/fusioninventory-agent/releases/tag/2.6
         - Installer l'agent
