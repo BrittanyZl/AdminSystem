@@ -317,13 +317,14 @@ systemctl restart cron
         - Télécharger l'agent depuis https://github.com/fusioninventory/fusioninventory-agent/releases/tag/2.6
         - Installer l'agent
         - Configurer C:\Program Files\FusionInventory-Agent\agent.cfg avec :
-        ```sh
+        
+```sh
 Mode servers = http://<IP_SERVER>/plugins/fusioninventory/front/plugin_fusioninventory.communication.php
 ```
 - Redémarrer le service
-´´´sh
+```sh
 net stop FusionInventory-Agent && net start FusionInventory-Agent
-´´´
+```
 - Pour Linux (Debian/Ubuntu)
 ```sh
 wget https://github.com/fusioninventory/fusioninventory-agent/releases/download/2.6/fusioninventory-agent_2.6-1_all.deb
