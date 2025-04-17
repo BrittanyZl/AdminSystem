@@ -3,41 +3,41 @@
 
 GLPI est une solution open source de gestion de parc informatique et de services d’assistance (helpdesk). C’est un outil très complet, utilisé principalement dans les entreprises, administrations et structures IT pour gérer efficacement leurs ressources informatiques, suivre les demandes d’assistance, et organiser les interventions des techniciens.
 
-## Utilisation Gpli avec serveur Ubuntu 22.04
+## Utilisation GLPI avec serveur Ubuntu 22.04
 
-## INSTALLATION ET CONFIGURATION
+### Installation et Configuration
 
-## Mise à jour du serveur
-´´´sh
+- Mise à jour du serveur
+```sh
 sudo -i
 apt update && apt -y dist-upgrade
 ```
 
 - Installation et autorisation du ssh pour l'accés à distance
-´´´sh
+```sh
 sudo apt install ssh
 sudo ufw allow ssh
-´´´
+```
 
 - Connexion à distance dans l'invite de commande
-´´´sh
-ssh NomDuServeur@IpServeur
-´´´
+```sh
+ssh <Nom_Serveur>@<Ip_Serveur>
+```
 
 - Installation d'Apache2
-´´´sh
+```sh
 apt install apache2
-´´´
+```
 
 - Installation de PHP 8.2
-´´´sh
+```sh
 sudo apt install software-properties-common -y
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
-´´´
+```
 
 - Installation des modules PHP 8.2
-´´´sh
+```sh
 sudo apt install -y \
     php8.2-cli \
     php8.2-fpm \
@@ -53,16 +53,16 @@ sudo apt install -y \
     php8.2-gmp \
     php8.2-opcache \
     php8.2-apcu
-´´´
+```
 
 - Vérification de PHP
-´´´sh
+```sh
 php8.2 -v
 php8.2 -m
-´´´
+```
 
 - Installation des dépendances supplémentaires
-´´´sh
+```sh
 sudo apt update && sudo apt install -y \
     libapache2-mod-php8.2 \
     hunspell \
@@ -70,159 +70,178 @@ sudo apt update && sudo apt install -y \
     imagemagick \
     unzip \
     php8.2-opcache
-´´´
+```
 
 - Vérification de PHP
-´´´sh
+```sh
 php -v
-´´´
+```
 
 - Configuration de PHP
-´´´sh
+```sh
 ls /etc/php
-´´´
+```
 
 - Création d'un fichier test
-´´´sh
+```sh
 nano /var/www/html/main.php
+```
+
     - son contenu
+```sh
 <?php phpinfo(); ?>     
-´´´
+```
 
 - Redémarrer et vérifier le service apache2
-´´´sh
+```sh
 systemctl restart apache2
 systemctl status apache2
-´´´
+```
 
 - Vérification de la page test
 ```sh
 http://<IP_SERVER>/main.php
-´´´
+```
 
 - Installation de MariaDB(ou MySQL)
-´´´sh
+```sh
 apt -y install mariadb-server
 systemctl restart mariadb
-´´´
+```
 
 - Sécurisation de MariaDB
-´´´sh
+```sh
 mysql_secure_installation
-´´´
+```
 
 - Réponses à la sécurisation
-´´´sh
+```sh
 Switch to unix_socket authentication [Y/n] n
 Change the root password? [Y/n] n
 Remove anonymous users? [Y/n] y
 Disallow root login remotely? [Y/n] y
 Remove test database and access to it? [Y/n] y
 Reload privilege tables now? [Y/n] y
-´´´
+```
 
 - Rédemarrer MariaDB
-´´´sh
+```sh
 systemctl restart mariadb
-´´´
+```
 
 - Création de la base de données GLPI
-´´´sh
+```sh
 mysql -u root
-´´´
+```
 
 - A faire dans MySQL
-´´´sh
+
     - Liste les base de données existantes
-show databases;  
-    - Création d'une base de données         
-create database glpi; 
-    - Création d'un utilisateur avec son mot de passe    
-create user 'admin'@localhost identified by 'cfitech'; 
-    - Attributions des permissions 
-grant all privileges on glpi.* to admin@localhost;
-flush privileges;
+```sh
+    show databases;
+```
+
+    - Création d'une base de données
+  ```sh      
+    create database glpi; 
+```
+
+    - Création d'un utilisateur avec son mot de passe
+ ```sh
+    create user 'admin'@localhost identified by 'cfitech'; 
+```
+
+    - Attributions des permissions
+```sh
+    grant all privileges on glpi.* to admin@localhost;
+    flush privileges;
+```
+
     - Sortir
-exit
-´´´
+```sh
+    exit
+```
 
 - Rédemarrer MariaDB
-´´´sh
+```sh
 systemctl restart mariadb
-´´´
+```
 
 - Téléchargement et Extraction de GLPI
     - Depuis : https://github.com/glpi-project/glpi/releases?page=2
-´´´sh 
+```sh 
 wget https://github.com/glpi-project/glpi/releases/download/10.0.6/glpi-10.0.6.tgz
 tar -xzf glpi-10.0.6.tgz -C /var/www/html/
 ls /var/www/html/
-´´´
+```
 - Configuration d'Apache pour GLPI
-´´´sh
+```sh
 nano /etc/apache2/sites-available/000-default.conf
-    ## Son contenu
+```
+    - Son contenu
+```sh
 <VirtualHost *:80>
     DocumentRoot /var/www/html/glpi
 </VirtualHost>
-´´´
+```
 - Attribution des droits d'accès
-´´´sh
+```sh
 chown -R www-data:www-data /var/www/html/glpi
 ls -l /var/www/html
-´´´
+```
 
 - Installation et Activation de SELInux
-´´´sh
+```sh
 sudo apt install selinux-basics selinux-policy-default auditd -y
 sudo selinux-activate
 nano /etc/selinux/config
-´´´
+```
 
 - Modification du fichier de configuration de SELinux
-´´´sh
+```sh
 SELINUX=Enforcing
-´´´
+```
 
 - Installation de modules PHP supplémentaires
-´´´sh 
+```sh 
 sudo apt install php8.2-ldap php8.2-imap php8.2-xmlrpc -y
-´´´
+```
 - Redémmarrer le service Apache
-´´´sh
+```sh
 systemctl restart apache2
-´´´
+```
 
 - Installation de GLPI via l'interface web
     - Accès à : http://<IP_SERVER>/install/install.php
     - Sélectionner la langue et suivre l’assistant
     - Entrer les informations de la base de données
     - Valider l’installation
-´´´sh
+
     - Entrer ces données
+```sh
         Serveur : localhost
         Utilisateur : admin
         Mot de passe : cfitech
         Base de données : glpi
-´´´
+```
 
 - Sécurisation de GLPI
     - Supprimer le script d’installation
-´´´sh
+```sh
 rm -fr /var/www/html/glpi/install/install.php
-´´´
+```
 
 - Modifier php.ini pour renforcer la sécurité
-´´´sh
+```sh
 nano /etc/php/8.2/apache2/php.ini
     - Ajouter/Modifier
 session.cookie_httponly = on
-´´´
+```
 
 - Redémarrer Apache
-´´´sh
+```sh
 systemctl restart apache2
-´´´
+```
 
 - Accès à GLPI
     - L’interface est disponible à l’adresse http://<IP_SERVER>
@@ -230,31 +249,30 @@ systemctl restart apache2
     - Mot de passe : glpi  
 
 - Installation du Plugin FusionInventory
-´´´sh
     - Se placer dans le dossier des plugins GLPI
+```sh
     cd /var/www/html/glpi/plugins
-´´´
-´´´sh
+```
 - Télécharger la dernière version du plugin
+```sh
 wget https://github.com/fusioninventory/fusioninventory-for-glpi/releases/download/glpi10.0.6%2B1.1/fusioninventory-10.0.6+1.1.tar.bz2
-´´´
-´´´sh
+```
 - Extraire l'archive
+```sh
 tar -xjf fusioninventory-10.0.6+1.1.tar.bz2
-´´´
-
-´´´sh
+```
 - Configurer les permissions
+```sh
 chown -R www-data:www-data fusioninventory
-´´´
+```
 
 - Configuration d'Apache
-´´´sh
     - Créer la configuration virtuelle
+```sh
     nano /etc/apache2/sites-available/glpi.conf
-´´´
+```
     - Ajouter la configuration suivante
-´´´sh
+```sh
 <VirtualHost *:80>
     DocumentRoot /var/www/html/glpi
     <Directory /var/www/html/glpi>
@@ -263,28 +281,30 @@ chown -R www-data:www-data fusioninventory
         Require all granted
     </Directory>
 </VirtualHost>
-´´´
+```
 
 - Exécuter ceci
-´´´sh
+```sh
 a2ensite glpi.conf
 a2dissite 000-default.conf
 systemctl restart apache2
 curl -I http://localhost/plugins/fusioninventory/front/plugin_fusioninventory.communication.php
-´´´
+```
 
 - Configurez le cron pour les tâches automatique (optionnel mais recommandé)
-´´´sh
+```sh
 crontab -e
-´´´
+```
     - Ajouter
+```sh
 */1 * * * * php /var/www/html/glpi/front/cron.php
+```
 
 - Redémarrer le service Cron
-´´´sh
+```sh
 /etc/init.d/cron restart
 systemctl restart cron
-´´´
+```
 - Activation dans GLPI
     - Se connecter à GLPI (http://)
     - Aller dans Configuration > Plugins
@@ -292,19 +312,21 @@ systemctl restart cron
     - Aller dans Configuration > Action automatique
     - Rechercher taskscheduler et cliquer sur Exécuter
 
-- Installation des Agents
+### Installation des Agents
     - Pour Windows
         - Télécharger l'agent depuis https://github.com/fusioninventory/fusioninventory-agent/releases/tag/2.6
         - Installer l'agent
         - Configurer C:\Program Files\FusionInventory-Agent\agent.cfg avec :
+        
+```sh
 Mode servers = http://<IP_SERVER>/plugins/fusioninventory/front/plugin_fusioninventory.communication.php
-
+```
 - Redémarrer le service
-´´´sh
+```sh
 net stop FusionInventory-Agent && net start FusionInventory-Agent
-´´´
+```
 - Pour Linux (Debian/Ubuntu)
-´´´sh
+```sh
 wget https://github.com/fusioninventory/fusioninventory-agent/releases/download/2.6/fusioninventory-agent_2.6-1_all.deb
 sudo apt --fix-broken install
 sudo apt install hwdata
@@ -317,23 +339,23 @@ libyaml-tiny-perl libsocket-getaddrinfo-perl
 
 sudo dpkg -i fusioninventory-agent_2.6-1_all.deb
 sudo apt install -f
-´´´
+```
 
 - Configuration
-´´´sh
+```sh
 sudo nano /etc/fusioninventory/agent.cfg
-´´´
+```
 
 - Ajouter 
-´´´sh
+```sh
 <server url="http://<IP_SERVER>/plugins/fusioninventory/front/plugin_fusioninventory.communication.php"/>
-´´´
+```
 
 - Exécuter
-´´´sh
+```sh
 sudo systemctl enable fusioninventory-agent
 sudo systemctl start fusioninventory-agent
-´´´
+```
 
 - Vérification dans GLPI
     - Dans GLPI, aller dans Plugins > FusionInventory > Inventaire
