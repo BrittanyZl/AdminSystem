@@ -140,19 +140,23 @@ mysql -u root
 ```sh
     show databases;
 ```
+
     - Création d'une base de données
   ```sh      
     create database glpi; 
 ```
+
     - Création d'un utilisateur avec son mot de passe
  ```sh
     create user 'admin'@localhost identified by 'cfitech'; 
 ```
+
     - Attributions des permissions
 ```sh
     grant all privileges on glpi.* to admin@localhost;
     flush privileges;
 ```
+
     - Sortir
 ```sh
     exit
