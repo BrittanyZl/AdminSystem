@@ -86,6 +86,8 @@ ls /etc/php
 - Création d'un fichier test
 ```sh
 nano /var/www/html/main.php
+```
+```sh
     - son contenu
 <?php phpinfo(); ?>     
 ```
