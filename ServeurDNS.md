@@ -305,7 +305,7 @@ network:
       nameservers:
         addresses: [192.168.1.2, 192.168.1.3]   #Mettre adresse IP du serveur primaire & secondaire
 ```
-
+- Appliquez la configuration
 ```sh
 sudo netplan apply
 ```
